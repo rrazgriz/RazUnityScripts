@@ -1,3 +1,4 @@
+// License Unknown
 // Based on LLeaLoo's script
 #if UNITY_EDITOR
 using System.Collections;
