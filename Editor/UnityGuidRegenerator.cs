@@ -13,7 +13,9 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 
-namespace UnityGuidRegenerator {
+#if UNITY_EDITOR
+namespace Raz
+{
     public class UnityGuidRegeneratorMenu {
         [MenuItem("Assets/Regenerate GUIDs/Regenerate")]
         public static void RegenerateGuids() {
@@ -240,3 +242,4 @@ namespace UnityGuidRegenerator {
         }
     }
 }
+#endif

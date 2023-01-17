@@ -7,36 +7,39 @@
 using UnityEditor;
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class SwapGlobalTexture : MonoBehaviour
+namespace Raz
 {
-    public Texture textureA, textureB;
-    public bool swapToA, swapToB;
-    public string texturePropertyToSet = "_AudioTexture";
-
-    void Start()
+    [ExecuteInEditMode]
+    public class SwapGlobalTexture : MonoBehaviour
     {
+        public Texture textureA, textureB;
+        public bool swapToA, swapToB;
+        public string texturePropertyToSet = "_AudioTexture";
+
         #if UNITY_EDITOR
-        if(textureA == null)
+        void Start()
         {
-            string[] findAudioLink = AssetDatabase.FindAssets("rt_audioLink t:rendertexture");
-            if(findAudioLink.Length == 1)
-                textureA = AssetDatabase.LoadAssetAtPath<RenderTexture>(AssetDatabase.GUIDToAssetPath(findAudioLink[0]));
+            if(textureA == null)
+            {
+                string[] findAudioLink = AssetDatabase.FindAssets("rt_audioLink t:rendertexture");
+                if(findAudioLink.Length == 1)
+                    textureA = AssetDatabase.LoadAssetAtPath<RenderTexture>(AssetDatabase.GUIDToAssetPath(findAudioLink[0]));
+            }
+            #endif
         }
-        #endif
-    }
 
-    void Update()
-    {
-        #if UNITY_EDITOR
-        if(swapToA || swapToB)
+        void Update()
         {
-            if(swapToA)
-                Shader.SetGlobalTexture(Shader.PropertyToID(texturePropertyToSet), textureA);
-            else if(swapToB)
-                Shader.SetGlobalTexture(Shader.PropertyToID(texturePropertyToSet), textureB);
-            
-            swapToA = swapToB = false;
+            #if UNITY_EDITOR
+            if(swapToA || swapToB)
+            {
+                if(swapToA)
+                    Shader.SetGlobalTexture(Shader.PropertyToID(texturePropertyToSet), textureA);
+                else if(swapToB)
+                    Shader.SetGlobalTexture(Shader.PropertyToID(texturePropertyToSet), textureB);
+                
+                swapToA = swapToB = false;
+            }
         }
         #endif
     }

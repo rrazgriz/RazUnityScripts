@@ -20,7 +20,7 @@ using UnityEngine;
 // using HarmonyLib;
 
 #pragma warning disable 0618 // SetVirtualRealitySDKs is obsolete, CS0618 => 'member' is obsolete: 'text'
-namespace Razgriz
+namespace Raz
 {
     [InitializeOnLoad]
     class SetVRPlayerSettings

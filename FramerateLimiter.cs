@@ -1,37 +1,41 @@
 // License Unknown
 // Based on LLeaLoo's script
-#if UNITY_EDITOR
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class FramerateLimiter : MonoBehaviour
+namespace Raz
 {
-    public int targetFrameRate = 30;
-}
-
-[CustomEditor(typeof(FramerateLimiter), true)]
-public class FramerateLimiterEditor : Editor
-{
-    private FramerateLimiter my;
-
-    public override void OnInspectorGUI()
+    public class FramerateLimiter : MonoBehaviour
     {
-        my = (FramerateLimiter) target;
-
-        this.DrawDefaultInspector();
-        GUILayout.Label("Current Target Framerate: " + Application.targetFrameRate.ToString());
-
-        if (GUILayout.Button("Update Target")){ SetTargetFramerate(); }
+        public int targetFrameRate = 30;
     }
 
-    void SetTargetFramerate()
+    [CustomEditor(typeof(FramerateLimiter), true)]
+    public class FramerateLimiterEditor : Editor
     {
-        my = (FramerateLimiter) target;
+        #if UNITY_EDITOR
+        private FramerateLimiter my;
 
-        QualitySettings.vSyncCount = 0;  // VSync must be disabled
-        Application.targetFrameRate = my.targetFrameRate; // Use -1 to set back to default
+        public override void OnInspectorGUI()
+        {
+            my = (FramerateLimiter) target;
+
+            this.DrawDefaultInspector();
+            GUILayout.Label("Current Target Framerate: " + Application.targetFrameRate.ToString());
+
+            if (GUILayout.Button("Update Target")){ SetTargetFramerate(); }
+        }
+
+        void SetTargetFramerate()
+        {
+            my = (FramerateLimiter) target;
+
+            QualitySettings.vSyncCount = 0;  // VSync must be disabled
+            Application.targetFrameRate = my.targetFrameRate; // Use -1 to set back to default
+        }
+        #endif
     }
 }
-#endif
