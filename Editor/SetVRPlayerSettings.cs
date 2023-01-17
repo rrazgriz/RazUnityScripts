@@ -49,7 +49,7 @@ namespace Raz
 
 #if VRC_SDK_VRCSDK3
 /*
-        static Harmony harmonyInstance = new Harmony("Razgriz.FixVRCSDKVRSettings");
+        static Harmony harmonyInstance = new Harmony("Raz.FixVRCSDKVRSettings");
         [HarmonyPatch(typeof(VRC.Editor.EnvConfig), nameof(VRC.Editor.EnvConfig.SetVRSDKs))]
         class PatchVRCSDKVRSettings
         {
@@ -65,10 +65,10 @@ namespace Raz
 
         static void GetEditorPrefs()
         {
-            if (EditorPrefs.HasKey("Razgriz.VRPlayerSettings"))
-                vrSdkList = EditorPrefs.GetString("Razgriz.VRPlayerSettings").Split(',');
+            if (EditorPrefs.HasKey("Raz.VRPlayerSettings"))
+                vrSdkList = EditorPrefs.GetString("Raz.VRPlayerSettings").Split(',');
 
-            if (!EditorPrefs.HasKey("Razgriz.VRPlayerSettings") || vrSdkList.Length < 2)
+            if (!EditorPrefs.HasKey("Raz.VRPlayerSettings") || vrSdkList.Length < 2)
             {
                 vrSdkList = PlayerSettings.GetAvailableVirtualRealitySDKs(EditorUserBuildSettings.selectedBuildTargetGroup);
                 SetNone();
@@ -77,7 +77,7 @@ namespace Raz
 
         static void SetEditorPrefs()
         {
-            EditorPrefs.SetString("Razgriz.VRPlayerSettings", String.Join(",", vrSdkList));
+            EditorPrefs.SetString("Raz.VRPlayerSettings", String.Join(",", vrSdkList));
         }
 
         public static void ApplySettings()
