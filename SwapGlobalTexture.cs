@@ -25,12 +25,10 @@ namespace Raz
                 if(findAudioLink.Length == 1)
                     textureA = AssetDatabase.LoadAssetAtPath<RenderTexture>(AssetDatabase.GUIDToAssetPath(findAudioLink[0]));
             }
-            #endif
         }
 
         void Update()
         {
-            #if UNITY_EDITOR
             if(swapToA || swapToB)
             {
                 if(swapToA)
