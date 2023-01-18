@@ -16,37 +16,37 @@ using UnityEditor;
 
 namespace Raz
 {
-	[InitializeOnLoad]
-	public class PlayModeFocusHandler
-	{
+    [InitializeOnLoad]
+    public class PlayModeFocusHandler
+    {
         static readonly Type windowLayoutType;
         static readonly MethodInfo tryGetLastFocusedWindowInSameDockMethod;
-		static bool showGameViewOnPlayMode = false;
+        static bool showGameViewOnPlayMode = false;
 
         const string TOOLBAR_PATH = "Tools/Playmode Game View Focus/";
-		const string EDITOR_PREFS_KEY = "Raz.PlayModeFocusOverride";
-		
+        const string EDITOR_PREFS_KEY = "Raz.PlayModeFocusOverride";
+
         static PlayModeFocusHandler()
         {
-			GetEditorPrefs();
+            GetEditorPrefs();
             windowLayoutType = Assembly.Load("UnityEditor.dll").GetType("UnityEditor.WindowLayout");
-            tryGetLastFocusedWindowInSameDockMethod = windowLayoutType.GetMethod("TryGetLastFocusedWindowInSameDock", BindingFlags.Static | BindingFlags.NonPublic); 
+            tryGetLastFocusedWindowInSameDockMethod = windowLayoutType.GetMethod("TryGetLastFocusedWindowInSameDock", BindingFlags.Static | BindingFlags.NonPublic);
         }
 
-		[InitializeOnEnterPlayMode]
-		public static void OnEnterPlayMode()
-		{
-			EditorApplication.delayCall -= HandleGameModeRefocus;
-			EditorApplication.delayCall += HandleGameModeRefocus;
-		}
+        [InitializeOnEnterPlayMode]
+        public static void OnEnterPlayMode()
+        {
+            EditorApplication.delayCall -= HandleGameModeRefocus;
+            EditorApplication.delayCall += HandleGameModeRefocus;
+        }
 
-		static void HandleGameModeRefocus()
-		{
-			if(!showGameViewOnPlayMode)
-				((EditorWindow)tryGetLastFocusedWindowInSameDockMethod?.Invoke(null, null))?.ShowTab();
+        static void HandleGameModeRefocus()
+        {
+            if (!showGameViewOnPlayMode)
+                ((EditorWindow)tryGetLastFocusedWindowInSameDockMethod?.Invoke(null, null))?.ShowTab();
 
-			EditorApplication.delayCall -= HandleGameModeRefocus;
-		}
+            EditorApplication.delayCall -= HandleGameModeRefocus;
+        }
 
         static void GetEditorPrefs() => showGameViewOnPlayMode = EditorPrefs.GetBool(EDITOR_PREFS_KEY, showGameViewOnPlayMode);
         static void SetEditorPrefs() => EditorPrefs.SetBool(EDITOR_PREFS_KEY, showGameViewOnPlayMode);
@@ -58,18 +58,18 @@ namespace Raz
         public static void EnablePlayModeFocus()
         {
             showGameViewOnPlayMode = true;
-			SetEditorPrefs();
+            SetEditorPrefs();
         }
 
         [MenuItem(TOOLBAR_PATH + "Don't show GameView on PlayMode", true, 0)]
         static bool CanDisablePlayModeFocus() => showGameViewOnPlayMode == true;
-        
+
         [MenuItem(TOOLBAR_PATH + "Don't show GameView on PlayMode", false, 0)]
         public static void DisablePlayModeFocus()
         {
             showGameViewOnPlayMode = false;
-			SetEditorPrefs();
+            SetEditorPrefs();
         }
-	}
+    }
 }
 #endif
