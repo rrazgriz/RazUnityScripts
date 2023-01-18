@@ -13,10 +13,10 @@ namespace Raz
         public int targetFrameRate = 30;
     }
 
+    #if UNITY_EDITOR
     [CustomEditor(typeof(FramerateLimiter), true)]
     public class FramerateLimiterEditor : Editor
     {
-        #if UNITY_EDITOR
         private FramerateLimiter my;
 
         public override void OnInspectorGUI()
@@ -36,6 +36,6 @@ namespace Raz
             QualitySettings.vSyncCount = 0;  // VSync must be disabled
             Application.targetFrameRate = my.targetFrameRate; // Use -1 to set back to default
         }
-        #endif
     }
+    #endif
 }
