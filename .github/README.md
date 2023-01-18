@@ -9,5 +9,6 @@ They're not polished and can break things. Use at your own risk and all that.
 | [FramerateLimiter.cs](../FramerateLimiter.cs) | Limit framerate in Play Mode | N/A |
 | [SwapGlobalTexture.cs](../SwapGlobalTexture.cs) | Change a global texture property between two selected textures (or null) | MIT |
 | [YtdlpPlayer.cs](../YtdlpPlayer.cs) | Ytdlp -> Unity Video Player | MIT |
+| [PlayModeFocusHandler.cs](../Editor/PlayModeFocusHandler.cs) | Disable (or Enable) Play Mode forcing Game Mode to focused | MIT |
 | [SetVRPlayerSettings.cs](../Editor/SetVRPlayerSettings.cs) | Quickly Set VR Player Settings in Unity 2019 (and keep them) | MIT |
 | [UnityGuidRegenerator.cs](../Editor/UnityGuidRegenerator.cs) | Change GUID of assets in-place. Danger mode! | N/A |
